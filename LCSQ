@@ -1,0 +1,37 @@
+def lcsq(ar):
+    dicty = {}
+    gene = 'x'
+    fasta = ''
+    for row in ar:
+        if row[0] == '>':
+            dicty.update({gene: fasta})
+            gene = row[1:]
+            fasta = ''
+        else:
+            fasta += row
+    dicty.update({gene: fasta})
+    dicty.pop('x')
+    dna = list(geneDict.values())
+    string1=dna[0]
+    string2 = dna[1]
+      ln=[[0]*(len(string2)+1) for _ in range (len(string1)+1)]
+    for a,c in enumerate(string1):
+        for b,d in enumerate(string2):
+            if c==d:
+                ln[a+1][b+1]=ln[a][b]+1
+            else:
+                ln[a+1][b+1]=max(ln[a+1][b],ln[a][b+1])
+    final=""
+    x=len(string2)
+    for i in range (1,len(string1)+1):
+        if ln[i][x]!=ln[i-1][x]:
+            final+=string1[i-1]
+    return final
+                
+
+f=open("rosalind_lcsq (3).txt")
+text=f.read().split()
+f.close()
+print(lcsq(text))
+
+    
