@@ -1,0 +1,11 @@
+k=2
+m=2
+n=2
+total=k+m+n
+doublerec=((n/total)*((n-1)/(total-1)))
+doublehet=((m/(total)*(m-1)/(total-1)))
+recandhet=((m/total)*(n/total)+(n/total)*(m/(total-1)))
+
+recessive=doublerec+0.5*recandhet+0.25*doublehet
+dominant=1-recessive
+print(dominant)
