@@ -1,0 +1,9 @@
+def tree(ar):
+    corners=ar[1:]
+    n=int(ar[0])
+    number=len(corners)//2
+    final=int(n-number-1)
+    return final
+ar = list(map(int, input().split()))
+print(tree(ar))
+
