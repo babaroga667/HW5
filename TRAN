@@ -1,0 +1,13 @@
+def tran(x,y):
+    transitions=0
+    transversions=0
+    for a,b in zip(x,y):
+        if a+b in ("GA","AG","TC","CT"):
+            transitions+=1
+        elif a+b in ("TA", "AT", "CG", "GC", "CA", "AC", "TG", "GT"):
+            transversions+=1
+    fin=transitions/transversions
+    return fin
+s1=input()
+s2=input()
+print(tran(s1,s2))      
