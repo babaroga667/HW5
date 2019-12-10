@@ -1,0 +1,32 @@
+def fasta(x):
+    lst=[]
+    s=x.strip().split(">")
+    for i in s:
+        if len(i):
+            seg = i.split()
+            one = seg[0]
+            two = ''.join(seg[1:])
+            lst.append((one,two ))
+    return lst            
+            
+          
+def grph(func,y):
+    edit=fasta(func)
+    otherlst=[]
+    for suf,tail1 in edit:
+        for pref, tail2 in edit:
+            if suf!=pref and tail1.endswith(tail2[:y]):
+                otherlst.append((suf,pref))
+    return otherlst
+
+import os
+os.getcwd()
+os.chdir("C:\\Users\\Hena\\Downloads")
+
+
+f=open("rosalind_grph.txt")
+text=f.read()
+f.close()
+
+for num in grph(text,3):
+    print (num[0],num[1])
