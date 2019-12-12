@@ -1,0 +1,37 @@
+import itertools
+import math
+def pdst(array):
+    dicty = {}
+    gene = 'x'
+    fasta = ''
+    for row in array:
+        if row[0] == '>':
+            dicty.update({gene: fasta})
+            gene = row[1:]
+            fasta = ''
+        else:
+            fasta += row
+    dicty.update({gene: fasta})
+    dicty.pop('x')
+    strand= list(dicty.values())
+    ln = len(strand[0])
+    p = list(itertools.product(strand, repeat=2))
+    lst = []
+    for i in p:
+        x = i[0]
+        y = i[1]
+        count = 0
+        for j in range(ln):
+            if x[j]!=y[j]:
+                count += 0.1
+        lst.append(count)
+    draft = []
+    for z in lst:
+        draft.append('{0:.5f}'.format(z))
+    mat = [draft[s:s+int(math.sqrt(len(draft)))] for s in range(0, len(draft), int(math.sqrt(len(draft))))]
+    for e in mat:
+        print(*e)
+    return('')
+
+x = list(map(str, input().split()))
+print(pdst(x))
