@@ -1,0 +1,60 @@
+def orf(ar, codon):
+    for tran in ar:
+        rrna = [tran.replace('T', 'a').replace('A', 'u').replace('C', 'g').replace('G', 'c').upper()[::-1]]
+        rna = [tran.replace('T', 'U')]
+        modrna = rrna+rna
+        newrna = [''.join(modrna)]
+    start = 'AUG'
+    lst = []
+    for tran in rrna:
+        for i in re.finditer(start, tran):
+            a= (i.start())
+            lst.append(a)
+    lines = []
+    for tran in rrna:
+        for j in lst:
+            lines.append(tran[j:])
+    newprot = []
+    for z in lines:
+        l = [z[b:b+3] for b in range(0, len(z), 3)]
+        lstpro = []
+        for s in l:
+            lstpro.append(codon.get(s))
+            if codon.get(s) == 'Stop':
+                break
+        newprot.append(lstpro)
+    lst2 = []
+    for tran in rna:
+        for i in re.finditer(start, tran):
+            i2 = (i.start())
+            lst2.append(i2)
+    lines2 = []
+    for tran in rna:
+        for c in lst2:
+            lines2.append(tran[c:])
+    pr = []
+    for e in lines2:
+        l2 = [e[b:b+3] for b in range(0, len(e), 3)]
+        lstpro2 = []
+        for k in lines2:
+            pr.append(codon.get(k))
+            if codon.get(k) == 'Stop':
+                break
+                pr.append(lstpro2)
+    strand= newprot+pr
+    proteins = []
+    for h in strand:
+        if h[-1]=='Stop':
+            proteins.append(h)
+    final= []
+    for l in proteins:
+        if l not in nproteins:
+            final.append(l)
+    for b in final:
+        b.pop()
+    for z in final:
+        print(*z, sep='')
+    return('')
+ar=input()
+print(orf(ar,codon))
+
